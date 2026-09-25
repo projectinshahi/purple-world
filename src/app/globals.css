@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #17034b;
+  --color-ink: #1a1a1a;
+  --color-heading: #3a3a3a;
+  --color-body: #727272;
+  --color-muted: #999999;
+  --color-label: #747474;
+  --color-sky: #f2f8ff;
+  --color-accent: #1890f9;
+  --color-nav-active: #ff9a02;
+  --color-field-border: #a9c4ff;
+  --color-form-border: #ccdcff;
+  --color-footer-line: #30057f;
+
+  --font-display: var(--font-sora);
+  --font-sans: var(--font-montserrat);
+  --font-quote: var(--font-mukta);
+
+  --shadow-card: 0 4px 37px rgb(0 0 0 / 0.07);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* The design is drawn on a 1728px frame. On desktop, scale every rem-based
+     size with the viewport so narrower screens keep the same proportions. */
+  @media (min-width: 64rem) {
+    html {
+      font-size: clamp(12px, calc(100vw / 108), 16px);
+    }
+  }
+
+  body {
+    @apply bg-white font-sans text-ink antialiased;
+  }
+}
+
+@utility container-page {
+  @apply mx-auto w-full max-w-[108rem] px-5 sm:px-8 lg:px-[6.875rem];
+}
+
+@utility section-y {
+  @apply py-16 lg:py-[6.25rem];
+}
+
+/* Brand gradients, applied to text via background-clip */
+@utility text-gradient-gold {
+  @apply bg-linear-to-b from-[#e3be51] to-[#ba5007] bg-clip-text text-transparent;
+}
+
+@utility text-gradient-navy {
+  @apply bg-linear-to-b from-[#0a012c] to-[#290173] bg-clip-text text-transparent;
+}
+
+@utility text-gradient-blue {
+  @apply bg-linear-to-b from-[#55beff] to-[#003eb1] bg-clip-text text-transparent;
+}
+
+@utility bg-gradient-gold {
+  @apply bg-linear-to-b from-[#e3be51] to-[#ba5007];
+}
+
+@utility bg-gradient-navy {
+  @apply bg-linear-to-b from-[#0a012c] to-[#290173];
+}
