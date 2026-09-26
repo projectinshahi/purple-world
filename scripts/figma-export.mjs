@@ -26,7 +26,10 @@ const IMAGE_FILLS = {
   ff47788a: "images/avatar-rachel.jpg",
   "89e402d0": "images/avatar-alex.jpg",
   "5c240d6c": "images/avatar-bella.jpg",
-  "953506d3": "images/contact.jpg",
+  "953506d3": "images/contact-1.jpg",
+  b42f57c9: "images/contact-2.jpg",
+  "55bffca3": "images/contact-3.jpg",
+  "62b62d32": "images/contact-4.jpg",
   "225087b7": "images/flag-in.png",
 };
 

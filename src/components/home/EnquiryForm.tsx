@@ -1,17 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { CheckCircle2, ChevronDown } from "lucide-react";
+import { AlertCircle, CheckCircle2, ChevronDown } from "lucide-react";
 import { useState, type FormEvent, type ReactNode } from "react";
-import { budgetOptions, destinationOptions } from "@/data/site";
+import { budgetOptions, contactImages, destinationOptions } from "@/data/site";
 import { submitEnquiry } from "@/lib/enquiry";
 import { GradientButton } from "@/components/ui/GradientButton";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { ImageRotator } from "@/components/ui/ImageRotator";
 
 const fieldBox =
-  "flex h-14 w-full items-center gap-2 rounded-2xl border border-field-border bg-white px-5 transition focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/20";
+  "flex h-14 w-full items-center gap-2 rounded-2xl border border-field-border bg-white px-5 transition focus-within:field-active";
 const inputText =
-  "w-full min-w-0 bg-transparent text-base text-ink outline-none placeholder:text-muted lg:text-lg";
+  "w-full min-w-0 bg-transparent text-base text-[#212121] outline-none placeholder:text-muted lg:text-lg";
 
 function Field({ label, htmlFor, children, className = "" }: {
   label: string;
@@ -54,24 +55,31 @@ function Select({ id, name, options }: { id: string; name: string; options: stri
 }
 
 export function EnquiryForm() {
-  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [error, setError] = useState("");
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
     setStatus("sending");
-    await submitEnquiry({
-      fullName: String(data.get("fullName")),
-      phone: `+91 ${data.get("phone")}`,
-      travelDate: String(data.get("travelDate")),
-      destination: String(data.get("destination")),
-      budget: String(data.get("budget")),
-      travelers: Number(data.get("travelers")),
-      notes: String(data.get("notes") ?? ""),
-    });
-    form.reset();
-    setStatus("sent");
+    try {
+      await submitEnquiry({
+        fullName: String(data.get("fullName")),
+        phone: `+91 ${data.get("phone")}`,
+        travelDate: String(data.get("travelDate")),
+        destination: String(data.get("destination")),
+        budget: String(data.get("budget")),
+        travelers: Number(data.get("travelers")),
+        notes: String(data.get("notes") ?? ""),
+        website: String(data.get("website") ?? ""),
+      });
+      form.reset();
+      setStatus("sent");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+      setStatus("error");
+    }
   }
 
   const today = new Date().toISOString().split("T")[0];
@@ -87,7 +95,7 @@ export function EnquiryForm() {
         <div className="flex flex-col gap-10 lg:flex-row lg:gap-14">
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col gap-6 rounded-3xl border border-form-border bg-sky p-5 sm:p-10 lg:flex-[886] lg:gap-8"
+            className="relative flex flex-col gap-6 rounded-3xl border border-form-border bg-sky p-5 sm:p-10 lg:flex-[886] lg:gap-8"
           >
             <div className="grid gap-6 sm:grid-cols-2 sm:gap-x-4 lg:gap-y-8">
               <Field label="Full Name" htmlFor="fullName">
@@ -141,10 +149,13 @@ export function EnquiryForm() {
                   name="notes"
                   rows={4}
                   placeholder="Tell us what you need"
-                  className={`${inputText} h-[7.5rem] resize-none rounded-2xl border border-field-border bg-white px-5 py-4 transition focus:border-accent focus:ring-2 focus:ring-accent/20`}
+                  className="h-[7.5rem] w-full resize-none rounded-2xl border border-field-border bg-white px-5 py-4 text-base text-[#212121] outline-none transition placeholder:text-muted focus:field-active lg:text-lg"
                 />
               </Field>
             </div>
+
+            {/* Honeypot for spam bots: hidden from people and screen readers */}
+            <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute left-[-9999px] size-px opacity-0" />
 
             <GradientButton type="submit" disabled={status === "sending"} className="w-full">
               {status === "sending" ? "Sending…" : "Send Request"}
@@ -156,17 +167,19 @@ export function EnquiryForm() {
                 Thank you! Our team will get back to you within 12 hours.
               </p>
             )}
+            {status === "error" && (
+              <p role="alert" className="flex items-center justify-center gap-2 text-center font-medium text-red-700">
+                <AlertCircle className="size-5 shrink-0" />
+                {error}
+              </p>
+            )}
           </form>
 
-          <div className="relative hidden min-h-[25rem] overflow-hidden rounded-3xl bg-[#d9d9d9] sm:block lg:flex-[557]">
-            <Image
-              src="/images/contact.jpg"
-              alt="Rowing boat on a clear turquoise mountain lake"
-              fill
-              sizes="(min-width: 1024px) 35vw, 100vw"
-              className="object-cover"
-            />
-          </div>
+          <ImageRotator
+            images={contactImages}
+            sizes="(min-width: 1024px) 35vw, 100vw"
+            className="hidden min-h-[25rem] rounded-3xl bg-[#d9d9d9] sm:block lg:flex-[557]"
+          />
         </div>
       </div>
     </section>

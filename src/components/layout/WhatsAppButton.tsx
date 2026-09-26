@@ -1,8 +1,7 @@
 import Image from "next/image";
 import { contact } from "@/data/site";
 
-// Fixed on screen at the spot the design places it (616px down, aligned to the
-// right gutter), pulled up on short screens so it never drops out of view.
+// Fixed in the bottom-right corner of the screen
 export function WhatsAppButton() {
   return (
     <a
@@ -10,9 +9,17 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"
-      className="fixed right-5 bottom-6 z-40 rounded-full shadow-lg transition-transform hover:scale-110 lg:top-[min(38.5rem,calc(100vh-5rem))] lg:right-[max(6.875rem,calc((100vw-108rem)/2+6.875rem))] lg:bottom-auto"
+      className="group fixed right-5 bottom-6 z-40 lg:right-8 lg:bottom-8"
     >
-      <Image src="/icons/whatsapp.svg" alt="" width={44} height={44} className="size-11" />
+      <span className="block rounded-full shadow-lg">
+        <Image
+          src="/icons/whatsapp.svg"
+          alt=""
+          width={44}
+          height={44}
+          className="size-11 transition-transform group-hover:scale-110"
+        />
+      </span>
     </a>
   );
 }

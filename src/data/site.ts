@@ -1,10 +1,10 @@
 // Static site content. Will be replaced by the backend / admin panel later.
 
 export const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "Packages", href: "#packages" },
-  { label: "About Us", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/#home" },
+  { label: "Packages", href: "/packages" },
+  { label: "About Us", href: "/#about" },
+  { label: "Contact", href: "/#contact" },
 ] as const;
 
 export const contact = {
@@ -63,12 +63,7 @@ export const processSteps = [
   },
 ];
 
-export const destinations = [
-  {
-    image: "/images/destination-europe.jpg",
-    title: "European Elegance",
-    text: "Experience the Mediterranean coast or Alpine peaks in luxury. Our European roots unlock private estates and after-hours museum tours.",
-  },
+export const destinations: { image?: string; title: string; text: string; href?: string }[] = [
   {
     image: "/images/destination-asia.jpg",
     title: "Asian Immersion",
@@ -78,6 +73,12 @@ export const destinations = [
     image: "/images/destination-india.jpg",
     title: "The Indian Greatness",
     text: "Explore the rugged beauty or the versatile vibrant culture with itineraries that balance adventure with comfort.",
+  },
+  {
+    image: "/images/destination-kerala.jpg",
+    title: "Captivating Kerala",
+    text: "Tea hills in Munnar, houseboat nights in Alleppey, Wayanad's forests and Kovalam's beaches, all in one enchanting state.",
+    href: "/kerala",
   },
 ];
 
@@ -102,8 +103,16 @@ export const testimonials = [
   },
 ];
 
+export const contactImages = [
+  { src: "/images/contact-1.jpg", alt: "Rowing boat on a clear turquoise mountain lake" },
+  { src: "/images/contact-2.jpg", alt: "Red five-storey pagoda framed by cherry blossoms" },
+  // NOTE: Unsplash+ watermarked preview — replace or license before launch
+  { src: "/images/contact-3.jpg", alt: "Two hikers on a ridge trail above green mountain valleys" },
+  { src: "/images/contact-4.jpg", alt: "Whitewashed Greek island house with a blue gate and bougainvillea" },
+];
+
 // Placeholder options until the backend provides them
-export const destinationOptions = ["Europe", "Asia", "India", "Not sure yet"];
+export const destinationOptions = ["Asia", "India", "Kerala", "Not sure yet"];
 
 export const budgetOptions = [
   "Under ₹1 lakh",

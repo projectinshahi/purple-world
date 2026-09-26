@@ -1,7 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy: #17034b;
+  --color-navy: #1b0b3f;
+  --color-indigo: #2a1259;
+  --color-gold: #f0a93a;
+  --color-silver: #eef0fa;
   --color-ink: #1a1a1a;
   --color-heading: #3a3a3a;
   --color-body: #727272;
@@ -9,16 +12,34 @@
   --color-label: #747474;
   --color-sky: #f2f8ff;
   --color-accent: #1890f9;
-  --color-nav-active: #ff9a02;
+  --color-nav-active: #f0a93a;
   --color-field-border: #a9c4ff;
   --color-form-border: #ccdcff;
-  --color-footer-line: #30057f;
+  --color-footer-line: #3d2275;
+  --color-success: #1d8a5b;
 
   --font-display: var(--font-sora);
   --font-sans: var(--font-montserrat);
   --font-quote: var(--font-mukta);
 
   --shadow-card: 0 4px 37px rgb(0 0 0 / 0.07);
+
+  /* WhatsApp icon (Figma prototype): wait 0.8s, glide down 65px (1s),
+     wait 0.8s, glide back up (1s), repeat */
+  --animate-bob: bob 3.6s ease-in-out infinite;
+  @keyframes bob {
+    0%,
+    22% {
+      transform: translateY(0);
+    }
+    50%,
+    72% {
+      transform: translateY(4.0625rem);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
 }
 
 @layer base {
@@ -49,21 +70,31 @@
 
 /* Brand gradients, applied to text via background-clip */
 @utility text-gradient-gold {
-  @apply bg-linear-to-b from-[#e3be51] to-[#ba5007] bg-clip-text text-transparent;
+  @apply bg-linear-to-b from-gold to-[#c47612] bg-clip-text text-transparent;
 }
 
 @utility text-gradient-navy {
-  @apply bg-linear-to-b from-[#0a012c] to-[#290173] bg-clip-text text-transparent;
+  @apply bg-linear-to-b from-navy to-indigo bg-clip-text text-transparent;
 }
 
-@utility text-gradient-blue {
-  @apply bg-linear-to-b from-[#55beff] to-[#003eb1] bg-clip-text text-transparent;
+/* Secondary wordmark, like "Tours" in the logo. box-decoration-clone keeps the
+   full gradient on each line when the word wraps. */
+@utility text-gradient-brand {
+  @apply box-decoration-clone bg-linear-to-r from-[#2e8bff] to-gold bg-clip-text text-transparent;
 }
 
 @utility bg-gradient-gold {
-  @apply bg-linear-to-b from-[#e3be51] to-[#ba5007];
+  @apply bg-linear-to-b from-gold to-[#c47612];
+}
+
+/* Focused form field (Figma "active" variant): gradient border via two backgrounds */
+@utility field-active {
+  border-color: transparent;
+  background:
+    linear-gradient(#e9f0ff, #e9f0ff) padding-box,
+    linear-gradient(to bottom, #55beff, #003eb1) border-box;
 }
 
 @utility bg-gradient-navy {
-  @apply bg-linear-to-b from-[#0a012c] to-[#290173];
+  @apply bg-linear-to-b from-navy to-indigo;
 }

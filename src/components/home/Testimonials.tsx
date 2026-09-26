@@ -5,7 +5,8 @@ import { useCallback, useEffect, useState, type CSSProperties } from "react";
 import { testimonials } from "@/data/site";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
-const AUTOPLAY_MS = 5000;
+// Figma: after 2s delay, 0.5s ease-out slide
+const AUTOPLAY_MS = 2500;
 const count = testimonials.length;
 // Three copies so the strip can loop without a visible jump
 const slides = [...testimonials, ...testimonials, ...testimonials];
@@ -62,7 +63,7 @@ export function Testimonials() {
           <ul
             onTransitionEnd={(e) => e.target === e.currentTarget && handleTransitionEnd()}
             className={`absolute top-0 left-1/2 flex h-full items-center gap-(--gap) ${
-              animate ? "transition-transform duration-700 ease-out" : ""
+              animate ? "transition-transform duration-500 ease-out" : ""
             }`}
             style={
               {
@@ -81,7 +82,7 @@ export function Testimonials() {
                     setIndex(i);
                   }}
                   className={`relative flex w-(--card-w) shrink-0 cursor-pointer flex-col items-center gap-[1.125rem] rounded-3xl bg-white px-8 py-12 text-center shadow-card sm:px-12 ${
-                    animate ? "transition-transform duration-700 ease-out" : ""
+                    animate ? "transition-transform duration-500 ease-out" : ""
                   } ${isActive ? "scale-[1.126]" : "scale-100"}`}
                 >
                   <span

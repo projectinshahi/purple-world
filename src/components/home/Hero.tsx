@@ -21,13 +21,10 @@ export function Hero() {
       <div className="container-page relative pt-28 pb-16 lg:pt-[7.25rem]">
         <div className="flex max-w-[51.4375rem] flex-col gap-8">
           <div className="flex flex-col gap-4">
-            {/* The blue gradient spans the whole heading (as in Figma), so the
-                highlighted words darken from top line to bottom line */}
-            <h1 className="text-gradient-blue font-display text-[2.5rem] leading-[1.26] font-bold sm:text-6xl lg:text-[5rem]">
-              <span className="text-white">Beyond The Map: </span>
-              Journeys
-              <span className="text-white"> Designed Specifically </span>
-              For You
+            <h1 className="font-display text-[2.5rem] leading-[1.26] font-bold text-silver sm:text-6xl lg:text-[5rem]">
+              Beyond The Map: <span className="text-gradient-brand">Journeys</span>{" "}
+              Designed Specifically{" "}
+              <span className="text-gradient-brand">For You</span>
             </h1>
             <p className="text-base leading-[1.625rem] font-medium text-white capitalize lg:text-lg">
               Since 2013, Purpleworldtours has been crafting seamless travel

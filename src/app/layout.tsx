@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Montserrat, Mukta, Sora } from "next/font/google";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import "./globals.css";
 
 const sora = Sora({
@@ -22,7 +25,10 @@ const mukta = Mukta({
 });
 
 export const metadata: Metadata = {
-  title: "Purpleworldtours | Journeys Designed Specifically For You",
+  title: {
+    default: "Purpleworldtours | Journeys Designed Specifically For You",
+    template: "%s | Purpleworld Tours",
+  },
   description:
     "Since 2013, Purpleworldtours has been crafting seamless, bespoke travel experiences. Customized packages, expert curation and 24/7 global support.",
 };
@@ -33,7 +39,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${sora.variable} ${montserrat.variable} ${mukta.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <Navbar />
+        {children}
+        <Footer />
+        <WhatsAppButton />
+      </body>
     </html>
   );
 }
