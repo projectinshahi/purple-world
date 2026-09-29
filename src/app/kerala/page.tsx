@@ -39,7 +39,7 @@ export default async function KeralaPage() {
   // a fallback for when the backend is unreachable.
   const apiPackages = await getPackages("Kerala");
   const packageLinks = apiPackages
-    ? apiPackages.map((p) => ({ slug: p.slug, name: p.title, href: `/packages/${p.slug}` }))
+    ? apiPackages.map((p) => ({ slug: p.slug, name: p.title, href: `#${p.slug}` }))
     : keralaPackages.map((p) => ({ slug: p.slug, name: p.name, href: `#${p.slug}` }));
 
   return (

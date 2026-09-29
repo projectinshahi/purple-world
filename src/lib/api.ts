@@ -51,8 +51,6 @@ export const getPackages = (destination?: string) =>
     destination ? `/packages?destination=${encodeURIComponent(destination)}` : "/packages",
   );
 
-export const getPackage = (slug: string) => get<TourPackage>(`/packages/${encodeURIComponent(slug)}`);
-
 /** Uploaded images are stored as "/uploads/…" paths on the backend. */
 export function mediaUrl(path: string): string {
   return path.startsWith("/uploads/") ? `${API_URL}${path}` : path;

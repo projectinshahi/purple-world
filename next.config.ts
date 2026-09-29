@@ -9,8 +9,10 @@ const nextConfig: NextConfig = {
   // transparent on scroll.
   allowedDevOrigins: ["192.168.1.7"],
   images: {
-    // Images uploaded through the admin panel are served by purple-backend
+    // Images uploaded through the admin panel live on Cloudinary; older ones
+    // are still served by purple-backend
     remotePatterns: [
+      { protocol: "https", hostname: "res.cloudinary.com" },
       {
         protocol: apiUrl.protocol.replace(":", "") as "http" | "https",
         hostname: apiUrl.hostname,
