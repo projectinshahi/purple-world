@@ -27,9 +27,9 @@ export function Hero() {
               <span className="text-gradient-brand">For You</span>
             </h1>
             <p className="text-base leading-[1.625rem] font-medium text-white capitalize lg:text-lg">
-              Since 2013, Purpleworldtours has been crafting seamless travel
-              experiences that bridge the gap between imagination and reality.
-              Where do you want to go next?
+              Since 2013, Purpleworldtours has been crafting seamless tour and
+              holiday packages across Kerala, India and Asia that bridge the gap
+              between imagination and reality. Where do you want to go next?
             </p>
           </div>
           <GradientLink href="#packages" className="self-start">

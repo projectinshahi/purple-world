@@ -4,6 +4,8 @@ import { pillars } from "@/data/site";
 export function ValuePillars() {
   return (
     <section className="section-y bg-sky">
+      {/* Keeps the heading order (h1 → h2 → h3) for screen readers and search engines */}
+      <h2 className="sr-only">Why travel with Purpleworld Tours</h2>
       <div className="container-page grid justify-center gap-12 md:grid-cols-3 md:gap-10 lg:max-w-[81.75rem]">
         {pillars.map((pillar) => (
           <article

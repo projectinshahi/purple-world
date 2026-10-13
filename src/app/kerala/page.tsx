@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { ArrowDown, Lightbulb } from "lucide-react";
 import Link from "next/link";
 import { keralaDestinations, keralaPackages } from "@/data/kerala";
@@ -9,17 +8,17 @@ import { TourPackageCard } from "@/components/packages/TourPackageCard";
 import { FaqList } from "@/components/kerala/FaqList";
 import { EnquiryBand } from "@/components/ui/EnquiryBand";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Kerala Tour Packages: Munnar to Kovalam",
+export const metadata = pageMetadata({
+  title: "Kerala Tour Packages & Houseboat Holidays",
   description:
-    "Kerala (Keralam) tour packages: Alleppey houseboats, backwaters, Munnar tea hills, Wayanad, Kovalam beaches and Sabarimala & Guruvayur pilgrimages. Custom itineraries by Purpleworld Tours.",
-  openGraph: {
-    title: "Kerala Tour Packages | Purpleworld Tours",
-    description:
-      "Hill stations, backwaters, beaches and temples: explore our Kerala itineraries from 3 to 7 nights.",
-  },
-};
+    "Kerala tour packages from Kochi: Alleppey houseboats, Munnar tea hills, Thekkady, Wayanad, Kovalam beaches and Sabarimala & Guruvayur pilgrimages, tailored to you.",
+  path: "/kerala",
+});
+
+const breadcrumbs = [{ label: "Home", href: "/" }, { label: "Kerala" }];
 
 // All FAQs on the page, exposed to search engines as one FAQPage
 const faqSchema = {
@@ -44,10 +43,8 @@ export default async function KeralaPage() {
 
   return (
     <main>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c") }}
-      />
+      <JsonLd data={faqSchema} />
+      <JsonLd data={breadcrumbSchema(breadcrumbs, "/kerala")} />
 
       <PageHero
         eyebrow="God's Own Country"
@@ -57,7 +54,7 @@ export default async function KeralaPage() {
           </>
         }
         tagline="Misty tea hills, slow backwater cruises, forest highlands, golden beaches and ancient temples, planned around you by our Kerala specialists."
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Kerala" }]}
+        breadcrumbs={breadcrumbs}
       />
 
       <section className="section-y">

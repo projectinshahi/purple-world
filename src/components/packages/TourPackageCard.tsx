@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRight, Check, Clock, MapPin, MoveRight } from "lucide-react";
 import { formatDuration, formatPrice, mediaUrl, type TourPackage } from "@/lib/api";
 
@@ -68,13 +69,13 @@ export function TourPackageCard({ pkg }: { pkg: TourPackage }) {
             {formatPrice(pkg.price)}
             {pkg.price > 0 && <span className="text-sm font-normal text-body"> per person</span>}
           </p>
-          <a
+          <Link
             href="/#contact"
             className="inline-flex items-center gap-1.5 rounded-full bg-gradient-gold px-5 py-2.5 text-sm font-semibold text-white shadow-md transition duration-300 hover:shadow-lg hover:brightness-110 focus-visible:translate-y-0 focus-visible:opacity-100 lg:translate-y-3 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100"
           >
             Enquire Now
             <ArrowUpRight className="size-4" strokeWidth={2.5} />
-          </a>
+          </Link>
         </div>
       </div>
     </article>

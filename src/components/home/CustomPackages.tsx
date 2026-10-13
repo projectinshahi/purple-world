@@ -54,7 +54,7 @@ export function CustomPackages() {
                 <div className="group relative aspect-[305/373] overflow-hidden rounded-3xl bg-[#d9d9d9]">
                   <Image
                     src={step.image}
-                    alt={step.title}
+                    alt={step.alt}
                     fill
                     sizes="(min-width: 640px) 305px, 100vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"

@@ -18,6 +18,14 @@ export const contact = {
     "Kerala, India",
     "682024",
   ],
+  // The same address, split up for search engines' structured data
+  postalAddress: {
+    streetAddress: "No.9, CS Appart, Koonamthai, Edappally",
+    addressLocality: "Kochi",
+    addressRegion: "Kerala",
+    postalCode: "682024",
+    addressCountry: "IN",
+  },
 };
 
 export const pillars = [
@@ -48,16 +56,19 @@ export const customizationOptions = [
 export const processSteps = [
   {
     image: "/images/process-consultation.jpg",
+    alt: "Travel consultant planning a trip with clients at a table",
     title: "Consultation",
     text: "Share your vision with one of our regional experts.",
   },
   {
     image: "/images/process-curation.jpg",
+    alt: "Travel specialist choosing destination photos for an itinerary",
     title: "Curation",
     text: "Receive a draft itinerary featuring hand-picked hidden gems and preferred pricing.",
   },
   {
     image: "/images/process-confirmation.jpg",
+    alt: "Handshake confirming a travel booking",
     title: "Confirmation",
     text: "We finalize all bookings, providing you with a digital and physical travel vault containing all necessary documents.",
   },

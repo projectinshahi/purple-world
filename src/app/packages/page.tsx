@@ -1,15 +1,21 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { getPackages } from "@/lib/api";
 import { PageHero } from "@/components/ui/PageHero";
 import { TourPackageCard } from "@/components/packages/TourPackageCard";
 import { EnquiryBand } from "@/components/ui/EnquiryBand";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Tour Packages",
+// Filtered views (?destination=) share this canonical URL, so they aren't
+// indexed as duplicates of the full list
+export const metadata = pageMetadata({
+  title: "Tour & Holiday Packages",
   description:
-    "Browse Purpleworld Tours holiday packages: Kerala circuits, backwater and wellness breaks, Asia and India itineraries. Every package can be customised.",
-};
+    "Browse our tour and holiday packages, from classic Kerala circuits to backwater and wellness breaks. Every package can be customised to your dates, pace and budget.",
+  path: "/packages",
+});
+
+const breadcrumbs = [{ label: "Home", href: "/" }, { label: "Packages" }];
 
 export default async function PackagesPage({ searchParams }: PageProps<"/packages">) {
   const { destination } = await searchParams;
@@ -26,6 +32,7 @@ export default async function PackagesPage({ searchParams }: PageProps<"/package
 
   return (
     <main>
+      <JsonLd data={breadcrumbSchema(breadcrumbs, "/packages")} />
       <PageHero
         eyebrow="Handpicked Journeys"
         title={
@@ -34,11 +41,12 @@ export default async function PackagesPage({ searchParams }: PageProps<"/package
           </>
         }
         tagline="Tried-and-loved itineraries from our travel specialists. Pick one as it is, or use it as the starting point for your own custom trip."
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Packages" }]}
+        breadcrumbs={breadcrumbs}
       />
 
       <section className="section-y">
         <div className="container-page flex flex-col gap-10">
+          <h2 className="sr-only">{selected ? `${selected} tour packages` : "All tour packages"}</h2>
           {destinations.length > 1 && (
             <nav aria-label="Filter by destination" className="flex flex-wrap gap-3">
               <Link href="/packages" scroll={false} className={chip(!selected)}>
